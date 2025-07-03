@@ -22,9 +22,9 @@ import FoundationModels
     let session = LanguageModelSession()
     
     let result = try await session.geometricTranslation(
-        from: "Rhône river",
-        to: "Saône river",
-        on: "Mississippi river"
+        from: "Rhône River",
+        to: "Saône River",
+        on: "Mississippi River"
     )
     
     #expect(result == "Missouri River")
