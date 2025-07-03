@@ -1,6 +1,27 @@
 import Testing
+import FoundationModels
 @testable import LatentSpaceGeometry
 
-@Test func example() async throws {
-    // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+@Test func capitalCityTranslation() async throws {
+    let session = LanguageModelSession()
+    
+    let result = try await session.geometricTranslation(from: "France", to: "Paris", on: "Italy")
+    
+    #expect(result == "Rome")
+}
+
+@Test func soundProductionTranslation() async throws {
+    let session = LanguageModelSession()
+    
+    let result = try await session.geometricTranslation(from: "dog", to: "barking", on: "cat")
+    
+    #expect(result == "meowing")
+}
+
+@Test func tributaryTranslation() async throws {
+    let session = LanguageModelSession()
+    
+    let result = try await session.geometricTranslation(from: "Rhône river", to: "Saône river", on: "Mississippi river")
+    
+    #expect(result == "Missouri River")
 }
