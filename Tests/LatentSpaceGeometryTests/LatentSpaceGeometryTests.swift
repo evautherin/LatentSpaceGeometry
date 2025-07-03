@@ -21,7 +21,11 @@ import FoundationModels
 @Test func tributaryTranslation() async throws {
     let session = LanguageModelSession()
     
-    let result = try await session.geometricTranslation(from: "Rhône river", to: "Saône river", on: "Mississippi river")
+    let result = try await session.geometricTranslation(
+        from: "Rhône river",
+        to: "Saône river",
+        on: "Mississippi river"
+    )
     
     #expect(result == "Missouri River")
 }
