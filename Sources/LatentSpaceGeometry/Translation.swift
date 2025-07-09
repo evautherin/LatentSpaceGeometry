@@ -48,7 +48,7 @@ struct RelationshipDescriptor {
     func apply(to element: String, in session: LanguageModelSession) async throws -> ElementDescriptor {
         let response = try await session.respond (
             to: """
-            Give the \(nature) associated to \(name) that makes to thing about \(element).
+            Give the \(nature) associated to \(name) that makes to think about \(element).
             """,
             generating: ElementDescriptor.self,
             options: GenerationOptions(sampling: .greedy)
