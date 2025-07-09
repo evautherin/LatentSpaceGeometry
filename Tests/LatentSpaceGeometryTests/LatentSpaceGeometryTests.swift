@@ -10,14 +10,6 @@ import FoundationModels
     #expect(result == "Rome")
 }
 
-@Test func soundProductionTranslation() async throws {
-    let session = LanguageModelSession()
-    
-    let result = try await session.geometricTranslation(from: "dog", to: "barking", on: "cat")
-    
-    #expect(result == "meow")
-}
-
 @Test func tributaryTranslation() async throws {
     let session = LanguageModelSession()
     
@@ -28,6 +20,14 @@ import FoundationModels
     )
     
     #expect(result == "Missouri River")
+}
+
+@Test func soundProductionTranslation() async throws {
+    let session = LanguageModelSession()
+    
+    let result = try await session.geometricTranslation(from: "dog", to: "barking", on: "cat")
+    
+    #expect(result == "meow")
 }
 
 @Test func jeanValjeanTranslation() async throws {
@@ -47,7 +47,7 @@ import FoundationModels
     
     let result = try await session.geometricTranslation(
         from: "Charles Dickens",
-        to: "character Scrooge", // Scrooge personality trait overrides the character
+        to: "Scrooge character", // Scrooge personality traits override the character
         on: "Victor Hugo"
     )
     
