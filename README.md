@@ -11,6 +11,6 @@ Functionally correct unknown—this is a form of paradox!
 
 However, it is a paradox well understood by mathematical abstraction: in a mathematical equation, we do not know x, yet we can still affirm truths about x.
 
-Here is the concept: **leveraging the power of AI to mathematically create the new.**
+Here is the concept: **leveraging the power of AI to mathematically innovate.**
 
 `LatentSpaceGeometry` is an implementation of geometric transformations on the latent space of an AI model that the `FoundationModels` framework makes accessible in Swift.

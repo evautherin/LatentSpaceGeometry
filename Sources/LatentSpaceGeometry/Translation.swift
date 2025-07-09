@@ -17,6 +17,12 @@ struct ElementDescriptor {
 @Generable(description: "Conceptual relationship")
 struct RelationshipDescriptor {
     let description: String
+    
+    @Guide(description: """
+            Extract just the concise, generalized term describing the nature of the concept that brings the relationship (e.g., 'fiction character', 'river'), without mentioning any specific entities described elsewhere.
+            """)
+    let nature: String
+    
     @Guide(description: """
             Extract and provide just the concise, generalized term naming the conceptual relationship (e.g., 'capital city', 'parent company'), without mentioning any specific entities described elsewhere.
             """)
@@ -30,8 +36,8 @@ struct RelationshipDescriptor {
         
         let response = try await session.respond (
             to: """
-            Given a sequence of related concepts (\(source), \(target)), give the most frequent relationship to obtain the \(target) from the \(source).
-            Return the name for it by removing any explicit reference to \(source) or to \(target).
+            Give the nature of \(target) and the main notion that usually makes to think about \(target) when the \(source) is mentioned.
+            Name this notion by removing any specific reference to the \(source)"
             """,
             generating: Self.self,
             options: GenerationOptions(sampling: .greedy)
@@ -42,7 +48,7 @@ struct RelationshipDescriptor {
     func apply(to element: String, in session: LanguageModelSession) async throws -> ElementDescriptor {
         let response = try await session.respond (
             to: """
-            Give the most frequent \(name) for \(element).
+            Give the \(nature) associated to \(name) that makes to thing about \(element).
             """,
             generating: ElementDescriptor.self,
             options: GenerationOptions(sampling: .greedy)
