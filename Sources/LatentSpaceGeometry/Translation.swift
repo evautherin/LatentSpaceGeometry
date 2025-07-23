@@ -37,7 +37,7 @@ struct RelationshipDescriptor {
         let response = try await session.respond (
             to: """
             Give the nature of \(target) and the main notion that usually makes to think about \(target) when the \(source) is mentioned.
-            Name this notion by removing any specific reference to the \(source)"
+            Name this notion by removing any specific reference to the \(source)
             """,
             generating: Self.self,
             options: GenerationOptions(sampling: .greedy)
