@@ -9,7 +9,7 @@ import FoundationModels
 
 
 @Generable(description: "Conceptual Element")
-struct ElementDescriptor {
+public struct ElementDescriptor {
     let description: String
     let name: String
 }
@@ -34,7 +34,7 @@ struct RelationshipDescriptor {
         in session: LanguageModelSession
     ) async throws -> Self {
         
-        let response = try await session.respond (
+        let response = try await session.respond(
             to: """
             Give the nature of \(target) and the main notion that usually makes to think about \(target) when the \(source) is mentioned.
             Name this notion by removing any specific reference to the \(source)
@@ -45,8 +45,11 @@ struct RelationshipDescriptor {
         return response.content
     }
     
-    func apply(to element: String, in session: LanguageModelSession) async throws -> ElementDescriptor {
-        let response = try await session.respond (
+    func apply(
+        to element: String,
+        in session: LanguageModelSession
+    ) async throws -> ElementDescriptor {
+        let response = try await session.respond(
             to: """
             Give the \(nature) associated to \(name) that makes to think about \(element).
             """,
@@ -64,16 +67,15 @@ extension LanguageModelSession {
     ///   - source: The source conceptual domain or context.
     ///   - target: The target conceptual domain or context.
     ///   - element: The specific item in the source domain to translate.
-    /// - Returns: The result of translating the provided element from the source context to the target context, as a `String`.
+    /// - Returns: The result of translating the provided element from the source context to the target context, as an `ElementDescriptor`.
     /// - Throws: Rethrows errors from underlying language model operations if translation or relationship inference fails.
     public func geometricTranslation(
         from source: String,
         to target: String,
         on element: String
-    ) async throws -> String {
+    ) async throws -> ElementDescriptor {
         let vector = try await RelationshipDescriptor.semanticVector(from: source, to: target, in: self)
-        let result = try await vector.apply(to: element, in: self)
-        return result.name
+        let translatedElement = try await vector.apply(to: element, in: self)
+        return translatedElement
     }
 }
-
