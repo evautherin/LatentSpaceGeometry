@@ -75,6 +75,17 @@ struct ContinuumDescriptor {
 }
 
 extension LanguageModelSession {
+    /// Generates a conceptual interpolation between two concepts using a language model session.
+    ///
+    /// This method creates a conceptual continuum between `concept0` and `concept1`,
+    /// determines the generalized nature of their continuum, and produces an `ElementDescriptor`
+    /// that describes a point between them.
+    ///
+    /// - Parameters:
+    ///   - concept0: The first concept to interpolate between.
+    ///   - concept1: The second concept to interpolate between.
+    /// - Returns: An `ElementDescriptor` describing a conceptual blend of the two inputs.
+    /// - Throws: Rethrows any errors produced by the underlying language model session.
     public func geometricInterpolation(
         between concept0: String,
         and concept1: String
